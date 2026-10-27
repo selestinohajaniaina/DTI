@@ -1,7 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Public Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-sans:
+    'Public Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 
   /* Primary: deep forest green scale */

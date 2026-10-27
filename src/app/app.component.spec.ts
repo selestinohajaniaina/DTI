@@ -10,10 +10,7 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [
-        provideRouter([]),
-        importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
-      ],
+      providers: [provideRouter([]), importProvidersFrom(LucideAngularModule.pick(APP_ICONS))],
     }).compileComponents();
   });
 

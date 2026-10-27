@@ -10,10 +10,7 @@ describe('Home', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Home],
-      providers: [
-        provideRouter([]),
-        importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
-      ],
+      providers: [provideRouter([]), importProvidersFrom(LucideAngularModule.pick(APP_ICONS))],
     }).compileComponents();
   });
 
@@ -34,7 +31,9 @@ describe('Home', () => {
     const fixture = TestBed.createComponent(Home);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const articles = compiled.querySelectorAll('section[aria-labelledby="examples-heading"] article');
+    const articles = compiled.querySelectorAll(
+      'section[aria-labelledby="examples-heading"] article',
+    );
     expect(articles.length).toBe(3);
   });
 });

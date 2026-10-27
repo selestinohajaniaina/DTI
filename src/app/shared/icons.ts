@@ -1,3 +1,4 @@
+import type { LucideIcons } from 'lucide-angular';
 import {
   Aperture,
   Archive,
@@ -18,7 +19,6 @@ import {
   Info,
   Leaf,
   Lightbulb,
-  LucideIcons,
   Menu,
   Package,
   Puzzle,

@@ -20,10 +20,13 @@ backend, and authentication are intentionally out of scope for now.
 ## Commands
 
 ```sh
-npm install   # install dependencies
-npm start     # dev server → http://localhost:4200/
-npm run build # production build → dist/dti/
-npm test      # unit tests (Vitest, single run: npm test -- --watch=false)
+npm install        # install dependencies
+npm start          # dev server → http://localhost:4200/
+npm run build      # production build → dist/dti/
+npm test           # unit tests (Vitest, single run: npm test -- --watch=false)
+npm run lint       # ESLint (Angular + TypeScript + template a11y)
+npm run format     # Prettier write (check only: npm run format:check)
+npm run typecheck  # TypeScript check (app + specs; build also checks templates)
 ```
 
 ## Project structure
