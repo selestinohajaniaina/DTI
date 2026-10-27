@@ -1,0 +1,93 @@
+<header class="sticky top-0 z-40 border-b border-forest-900/10 bg-cream/90 backdrop-blur">
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-forest-900 focus:px-4 focus:py-2 focus:text-white"
+  >
+    Skip to main content
+  </a>
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6" aria-label="Primary">
+    <a routerLink="/" class="flex items-center gap-2.5" [attr.aria-label]="appFullName + ' — home'">
+      <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-forest-900 text-cream">
+        <lucide-icon name="recycle" [size]="20" aria-hidden="true" />
+      </span>
+      <span class="leading-tight">
+        <span class="block text-lg font-bold tracking-tight text-forest-950">{{ appName }}</span>
+        <span class="hidden text-xs font-medium text-stone-500 sm:block">{{ appFullName }}</span>
+      </span>
+    </a>
+
+    <div class="hidden items-center gap-1 md:flex">
+      <a
+        routerLink="/"
+        routerLinkActive="bg-forest-900/5 text-forest-900"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="rounded-full px-4 py-2 text-sm font-semibold text-stone-600 transition-colors hover:bg-forest-900/5 hover:text-forest-900"
+      >
+        Home
+      </a>
+      <a
+        routerLink="/how-it-works"
+        routerLinkActive="bg-forest-900/5 text-forest-900"
+        class="rounded-full px-4 py-2 text-sm font-semibold text-stone-600 transition-colors hover:bg-forest-900/5 hover:text-forest-900"
+      >
+        How It Works
+      </a>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a
+        routerLink="/"
+        fragment="upload"
+        class="hidden items-center gap-2 rounded-full bg-forest-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-forest-800 sm:inline-flex"
+      >
+        <lucide-icon name="upload" [size]="16" aria-hidden="true" />
+        Upload a photo
+      </a>
+      <button
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full text-forest-950 transition-colors hover:bg-forest-900/5 md:hidden"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mobile-menu"
+        aria-label="Toggle navigation menu"
+      >
+        @if (menuOpen()) {
+          <lucide-icon name="x" [size]="22" aria-hidden="true" />
+        } @else {
+          <lucide-icon name="menu" [size]="22" aria-hidden="true" />
+        }
+      </button>
+    </div>
+  </nav>
+
+  @if (menuOpen()) {
+    <div id="mobile-menu" class="border-t border-forest-900/10 bg-cream px-4 pb-5 pt-2 md:hidden">
+      <a
+        routerLink="/"
+        routerLinkActive="bg-forest-900/5 text-forest-900"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeMenu()"
+        class="block rounded-xl px-4 py-3 text-base font-semibold text-stone-700 hover:bg-forest-900/5"
+      >
+        Home
+      </a>
+      <a
+        routerLink="/how-it-works"
+        routerLinkActive="bg-forest-900/5 text-forest-900"
+        (click)="closeMenu()"
+        class="block rounded-xl px-4 py-3 text-base font-semibold text-stone-700 hover:bg-forest-900/5"
+      >
+        How It Works
+      </a>
+      <a
+        routerLink="/"
+        fragment="upload"
+        (click)="closeMenu()"
+        class="mt-2 flex items-center justify-center gap-2 rounded-xl bg-forest-900 px-4 py-3 text-base font-semibold text-white"
+      >
+        <lucide-icon name="upload" [size]="18" aria-hidden="true" />
+        Upload a photo
+      </a>
+    </div>
+  }
+</header>

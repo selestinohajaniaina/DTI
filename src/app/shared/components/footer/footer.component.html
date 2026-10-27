@@ -1,0 +1,53 @@
+<footer class="bg-forest-950 text-forest-100">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <p class="flex items-center gap-2.5">
+        <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-cream text-forest-950">
+          <lucide-icon name="recycle" [size]="20" aria-hidden="true" />
+        </span>
+        <span class="leading-tight">
+          <span class="block text-lg font-bold tracking-tight text-white">{{ appName }}</span>
+          <span class="block text-xs font-medium text-forest-300">{{ appFullName }}</span>
+        </span>
+      </p>
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-forest-200/80">{{ tagline }}</p>
+    </div>
+
+    <nav aria-label="Footer">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-forest-300">Explore</h2>
+      <ul class="mt-4 space-y-2.5 text-sm font-medium">
+        <li>
+          <a routerLink="/" class="transition-colors hover:text-white">Home</a>
+        </li>
+        <li>
+          <a routerLink="/how-it-works" class="transition-colors hover:text-white">How It Works</a>
+        </li>
+        <li>
+          <a routerLink="/results" class="transition-colors hover:text-white">Results</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-forest-300">Project status</h2>
+      <p class="mt-4 flex items-start gap-2 text-sm leading-relaxed text-forest-200/80">
+        <lucide-icon name="flask-conical" [size]="16" class="mt-0.5 shrink-0" aria-hidden="true" />
+        Frontend prototype. AI-powered analysis is not connected yet — the upload area is a visual
+        preview for now.
+      </p>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div
+      class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-forest-200/70 sm:flex-row sm:px-6"
+    >
+      <p>© {{ year }} {{ appName }} — {{ appFullName }}. All rights reserved.</p>
+      <p class="flex items-center gap-1.5">
+        Built with
+        <lucide-icon name="heart" [size]="13" aria-hidden="true" />
+        using Angular &amp; Tailwind CSS
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Public Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  /* Primary: deep forest green scale */
+  --color-forest-50: #f2f7f3;
+  --color-forest-100: #e0ede3;
+  --color-forest-200: #c3ddca;
+  --color-forest-300: #97c4a4;
+  --color-forest-400: #66a67a;
+  --color-forest-500: #45895d;
+  --color-forest-600: #336e48;
+  --color-forest-700: #2a573c;
+  --color-forest-800: #244632;
+  --color-forest-900: #1e3a2a;
+  --color-forest-950: #0f2018;
+
+  /* Secondary: fresh green accent + warm off-white canvas */
+  --color-leaf-300: #bef0c9;
+  --color-leaf-400: #7fdc95;
+  --color-leaf-500: #4cc36a;
+  --color-cream: #faf6ee;
+  --color-parchment: #f1ebdd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream font-sans text-stone-900 antialiased;
+}
+
+::selection {
+  background-color: var(--color-forest-200);
+  color: var(--color-forest-950);
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 3px solid var(--color-forest-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

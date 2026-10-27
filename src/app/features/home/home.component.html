@@ -1,0 +1,416 @@
+<!-- Hero -->
+<section class="overflow-hidden">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:pb-24 lg:pt-20">
+    <div>
+      <p class="inline-flex items-center gap-2 rounded-full border border-forest-900/15 bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-forest-800">
+        <lucide-icon name="sparkles" [size]="14" aria-hidden="true" />
+        Visual prototype — AI analysis coming soon
+      </p>
+      <h1 class="mt-6 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-forest-950 sm:text-5xl lg:text-6xl">
+        {{ sloganLines[0] }}
+        <span class="block text-forest-700">{{ sloganLines[1] }}</span>
+        {{ sloganLines[2] }}
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-stone-600">{{ tagline }}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <a
+          routerLink="/"
+          fragment="upload"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-forest-900 px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-forest-800"
+        >
+          <lucide-icon name="upload" [size]="18" aria-hidden="true" />
+          Upload a photo
+        </a>
+        <a
+          routerLink="/how-it-works"
+          class="inline-flex items-center justify-center gap-1.5 rounded-full px-7 py-3.5 text-base font-semibold text-forest-900 transition-colors hover:bg-forest-900/5"
+        >
+          See how it works
+          <lucide-icon name="arrow-right" [size]="18" aria-hidden="true" />
+        </a>
+      </div>
+      <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-stone-600">
+        <li class="flex items-center gap-1.5">
+          <lucide-icon name="check" [size]="16" class="text-forest-700" aria-hidden="true" />
+          No account needed
+        </li>
+        <li class="flex items-center gap-1.5">
+          <lucide-icon name="check" [size]="16" class="text-forest-700" aria-hidden="true" />
+          Photos stay on your device
+        </li>
+        <li class="flex items-center gap-1.5">
+          <lucide-icon name="check" [size]="16" class="text-forest-700" aria-hidden="true" />
+          Free prototype
+        </li>
+      </ul>
+    </div>
+
+    <!-- Concept preview card (static illustration, not real output) -->
+    <div class="relative" aria-label="Illustrated preview of how DTI could present reuse ideas">
+      <div class="rounded-3xl border border-forest-900/10 bg-white p-5 shadow-xl shadow-forest-900/10 sm:p-6">
+        <div class="flex items-center justify-between gap-3">
+          <p class="flex items-center gap-2 text-sm font-semibold text-forest-900">
+            <lucide-icon name="aperture" [size]="18" aria-hidden="true" />
+            Concept preview
+          </p>
+          <span class="rounded-full bg-forest-100 px-3 py-1 text-xs font-semibold text-forest-800">Sample</span>
+        </div>
+        <div class="mt-4 flex items-center gap-3 rounded-2xl bg-forest-50 p-3">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-forest-900 text-cream">
+            <lucide-icon name="image-plus" [size]="22" aria-hidden="true" />
+          </span>
+          <div class="min-w-0">
+            <p class="truncate text-sm font-semibold text-forest-950">plastic-bottle.jpg</p>
+            <p class="text-xs text-stone-500">Your photo would appear here</p>
+          </div>
+        </div>
+        <ul class="mt-4 space-y-2.5">
+          <li class="flex items-center gap-3 rounded-2xl border border-stone-200/80 p-3">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-leaf-300/50 text-forest-800">
+              <lucide-icon name="toy-brick" [size]="20" aria-hidden="true" />
+            </span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-sm font-semibold text-forest-950">DIY pull-along toy</p>
+              <p class="text-xs text-stone-500">Easy · about 1 hour</p>
+            </div>
+            <lucide-icon name="chevron-right" [size]="18" class="shrink-0 text-stone-400" aria-hidden="true" />
+          </li>
+          <li class="flex items-center gap-3 rounded-2xl border border-stone-200/80 p-3">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-leaf-300/50 text-forest-800">
+              <lucide-icon name="sprout" [size]="20" aria-hidden="true" />
+            </span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-sm font-semibold text-forest-950">Vertical garden planter</p>
+              <p class="text-xs text-stone-500">Medium · an afternoon</p>
+            </div>
+            <lucide-icon name="chevron-right" [size]="18" class="shrink-0 text-stone-400" aria-hidden="true" />
+          </li>
+          <li class="flex items-center gap-3 rounded-2xl border border-stone-200/80 p-3">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-leaf-300/50 text-forest-800">
+              <lucide-icon name="package" [size]="20" aria-hidden="true" />
+            </span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-sm font-semibold text-forest-950">Desk organizer</p>
+              <p class="text-xs text-stone-500">Easy · about 1 hour</p>
+            </div>
+            <lucide-icon name="chevron-right" [size]="18" class="shrink-0 text-stone-400" aria-hidden="true" />
+          </li>
+        </ul>
+        <p class="mt-4 text-center text-xs text-stone-500">Illustrative mock — not real AI output.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Upload -->
+<section id="upload" class="scroll-mt-20 bg-white/60" aria-labelledby="upload-heading">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+    <div class="max-w-2xl">
+      <h2 id="upload-heading" class="font-display text-3xl font-semibold tracking-tight text-forest-950 sm:text-4xl">
+        Start with a photo
+      </h2>
+      <p class="mt-3 text-lg leading-relaxed text-stone-600">
+        Drop in a picture of something you no longer need. For now you will see a local preview
+        only — analysis is not connected yet.
+      </p>
+    </div>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+      <div
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        [class.border-forest-600]="isDragging()"
+        [class.bg-forest-50]="isDragging()"
+        class="rounded-3xl border-2 border-dashed border-forest-900/25 bg-white p-6 transition-colors focus-within:border-forest-600 sm:p-10"
+      >
+        @if (previewUrl()) {
+          <div class="flex flex-col items-center text-center">
+            <img
+              [src]="previewUrl()"
+              [alt]="'Preview of ' + (fileName() ?? 'your uploaded photo')"
+              class="max-h-64 rounded-2xl border border-forest-900/10 object-contain shadow-sm"
+            />
+            <p class="mt-4 max-w-full truncate text-sm font-semibold text-forest-950">{{ fileName() }}</p>
+            <p class="mt-1 flex items-center gap-1.5 text-sm text-stone-500">
+              <lucide-icon name="check" [size]="15" class="text-forest-700" aria-hidden="true" />
+              Preview ready — this file never left your device.
+            </p>
+            <div class="mt-5 flex flex-wrap justify-center gap-3">
+              <button
+                type="button"
+                disabled
+                title="AI analysis is not connected yet"
+                class="inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-forest-900/40 px-6 py-3 text-sm font-semibold text-white"
+                aria-describedby="analyze-note"
+              >
+                <lucide-icon name="sparkles" [size]="16" aria-hidden="true" />
+                Analyze with AI
+              </button>
+              <button
+                type="button"
+                (click)="clearPreview()"
+                class="inline-flex items-center gap-2 rounded-full border border-forest-900/20 px-6 py-3 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-900/5"
+              >
+                <lucide-icon name="x" [size]="16" aria-hidden="true" />
+                Remove photo
+              </button>
+            </div>
+            <p id="analyze-note" class="mt-3 text-xs text-stone-500">
+              Analysis is disabled in this prototype. No image is uploaded anywhere.
+            </p>
+          </div>
+        } @else {
+          <label class="flex cursor-pointer flex-col items-center text-center">
+            <input
+              type="file"
+              accept="image/*"
+              class="sr-only"
+              (change)="onFilesSelected($event)"
+              aria-label="Choose a photo of an object to preview"
+            />
+            <span
+              class="flex h-16 w-16 items-center justify-center rounded-2xl bg-forest-900 text-cream"
+            >
+              <lucide-icon name="image-plus" [size]="28" aria-hidden="true" />
+            </span>
+            <span class="mt-5 text-lg font-semibold text-forest-950">
+              Drag &amp; drop your photo here
+            </span>
+            <span class="mt-1 text-sm text-stone-500">or use one of the options below · PNG, JPG, or WebP up to 10 MB</span>
+          </label>
+          <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+            <label
+              class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-forest-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-forest-800"
+            >
+              <input
+                type="file"
+                accept="image/*"
+                class="sr-only"
+                (change)="onFilesSelected($event)"
+                aria-label="Browse files for a photo to preview"
+              />
+              <lucide-icon name="upload" [size]="16" aria-hidden="true" />
+              Browse files
+            </label>
+            <label
+              class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-forest-900/20 bg-white px-6 py-3 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-900/5"
+            >
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                class="sr-only"
+                (change)="onFilesSelected($event)"
+                aria-label="Take a photo with your camera to preview"
+              />
+              <lucide-icon name="camera" [size]="16" aria-hidden="true" />
+              Use camera
+            </label>
+          </div>
+        }
+        @if (errorMessage()) {
+          <p role="alert" class="mx-auto mt-5 flex max-w-md items-start gap-2 rounded-2xl bg-red-50 p-3.5 text-sm font-medium text-red-800">
+            <lucide-icon name="circle-alert" [size]="17" class="mt-0.5 shrink-0" aria-hidden="true" />
+            {{ errorMessage() }}
+          </p>
+        }
+      </div>
+
+      <aside class="flex flex-col gap-4" aria-label="About this prototype demo">
+        <div class="rounded-3xl border border-forest-900/10 bg-forest-950 p-6 text-cream">
+          <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-leaf-400">
+            <lucide-icon name="flask-conical" [size]="16" aria-hidden="true" />
+            Prototype note
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-forest-100/90">
+            This upload area is a visual prototype. Choosing a photo shows a preview generated
+            entirely in your browser — nothing is sent to a server and no suggestions are produced
+            yet.
+          </p>
+        </div>
+        <div class="rounded-3xl border border-forest-900/10 bg-white p-6">
+          <p class="flex items-center gap-2 text-sm font-semibold text-forest-950">
+            <lucide-icon name="lightbulb" [size]="17" class="text-forest-700" aria-hidden="true" />
+            Tips for a good photo
+          </p>
+          <ul class="mt-3 space-y-2.5 text-sm leading-relaxed text-stone-600">
+            <li class="flex gap-2">
+              <lucide-icon name="sun" [size]="16" class="mt-0.5 shrink-0 text-forest-700" aria-hidden="true" />
+              Use natural light and a plain background.
+            </li>
+            <li class="flex gap-2">
+              <lucide-icon name="focus" [size]="16" class="mt-0.5 shrink-0 text-forest-700" aria-hidden="true" />
+              Keep the whole object in frame and in focus.
+            </li>
+            <li class="flex gap-2">
+              <lucide-icon name="package" [size]="16" class="mt-0.5 shrink-0 text-forest-700" aria-hidden="true" />
+              One object per photo works best.
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Example transformations -->
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24" aria-labelledby="examples-heading">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div class="max-w-2xl">
+      <h2 id="examples-heading" class="font-display text-3xl font-semibold tracking-tight text-forest-950 sm:text-4xl">
+        Waste in, wonder out
+      </h2>
+      <p class="mt-3 text-lg leading-relaxed text-stone-600">
+        A taste of the ideas DTI is being built to suggest. These examples are illustrative —
+        personalized suggestions arrive with the AI integration.
+      </p>
+    </div>
+    <a
+      routerLink="/how-it-works"
+      class="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-forest-800 hover:text-forest-950"
+    >
+      How suggestions will work
+      <lucide-icon name="arrow-right" [size]="16" aria-hidden="true" />
+    </a>
+  </div>
+
+  <div class="mt-10 grid gap-6 md:grid-cols-3">
+    @for (example of examples; track example.to) {
+      <article class="flex flex-col rounded-3xl border border-forest-900/10 bg-white p-6 shadow-sm">
+        <div class="flex items-center gap-3">
+          <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-stone-100 text-stone-500">
+            <lucide-icon [name]="example.fromIcon" [size]="22" aria-hidden="true" />
+          </span>
+          <div class="min-w-0">
+            <p class="text-xs font-semibold uppercase tracking-wider text-stone-400">From</p>
+            <p class="truncate text-sm font-semibold text-stone-600">{{ example.from }}</p>
+          </div>
+          <lucide-icon name="arrow-right" [size]="18" class="ml-auto shrink-0 text-forest-600" aria-hidden="true" />
+        </div>
+        <div class="mt-4 flex items-center gap-3 rounded-2xl bg-forest-50 p-3">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-forest-900 text-cream">
+            <lucide-icon [name]="example.toIcon" [size]="22" aria-hidden="true" />
+          </span>
+          <h3 class="text-base font-bold text-forest-950">{{ example.to }}</h3>
+        </div>
+        <p class="mt-4 flex-1 text-sm leading-relaxed text-stone-600">{{ example.description }}</p>
+        <dl class="mt-5 space-y-2 border-t border-stone-100 pt-4 text-sm">
+          <div class="flex justify-between gap-3">
+            <dt class="font-medium text-stone-500">Difficulty</dt>
+            <dd class="font-semibold text-forest-900">{{ example.difficulty }}</dd>
+          </div>
+          <div class="flex justify-between gap-3">
+            <dt class="font-medium text-stone-500">Time</dt>
+            <dd class="font-semibold text-forest-900">{{ example.time }}</dd>
+          </div>
+          <div class="flex justify-between gap-3">
+            <dt class="font-medium text-stone-500">You need</dt>
+            <dd class="text-right font-semibold text-forest-900">{{ example.materials }}</dd>
+          </div>
+        </dl>
+      </article>
+    }
+  </div>
+</section>
+
+<!-- Three steps -->
+<section class="bg-forest-950" aria-labelledby="steps-heading">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+    <div class="max-w-2xl">
+      <h2 id="steps-heading" class="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+        Three steps to a second life
+      </h2>
+      <p class="mt-3 text-lg leading-relaxed text-forest-200/80">
+        The whole experience is designed to take minutes — from forgotten object to finished project.
+      </p>
+    </div>
+    <ol class="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+      @for (step of steps; track step.title; let i = $index) {
+        <li class="relative">
+          <div class="flex items-center gap-4">
+            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-cream font-display text-xl font-bold text-forest-950">
+              {{ i + 1 }}
+            </span>
+            <lucide-icon [name]="step.icon" [size]="26" class="text-leaf-400" aria-hidden="true" />
+          </div>
+          <h3 class="mt-5 text-xl font-bold text-white">{{ step.title }}</h3>
+          <p class="mt-2 leading-relaxed text-forest-200/80">{{ step.text }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- Impact -->
+<section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24" aria-labelledby="impact-heading">
+  <div class="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+    <div>
+      <h2 id="impact-heading" class="font-display text-3xl font-semibold tracking-tight text-forest-950 sm:text-4xl">
+        Small projects, meaningful change
+      </h2>
+      <p class="mt-4 text-lg leading-relaxed text-stone-600">
+        Every object that gets reused is one less thing in a landfill — and one less new thing that
+        needs to be manufactured, packaged, and shipped.
+      </p>
+      <p class="mt-3 text-sm leading-relaxed text-stone-500">
+        DTI is just getting started, so these are the goals guiding the project — not measured
+        results.
+      </p>
+    </div>
+    <ul class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+      <li class="rounded-3xl border border-forest-900/10 bg-white p-6 shadow-sm">
+        <lucide-icon name="leaf" [size]="26" class="text-forest-700" aria-hidden="true" />
+        <h3 class="mt-4 text-base font-bold text-forest-950">Less landfill waste</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-stone-600">
+          Keep usable materials in circulation instead of sending them to the bin.
+        </p>
+      </li>
+      <li class="rounded-3xl border border-forest-900/10 bg-white p-6 shadow-sm">
+        <lucide-icon name="globe" [size]="26" class="text-forest-700" aria-hidden="true" />
+        <h3 class="mt-4 text-base font-bold text-forest-950">Lighter footprint</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-stone-600">
+          Reusing what you own avoids the cost of producing and shipping something new.
+        </p>
+      </li>
+      <li class="rounded-3xl border border-forest-900/10 bg-white p-6 shadow-sm">
+        <lucide-icon name="heart" [size]="26" class="text-forest-700" aria-hidden="true" />
+        <h3 class="mt-4 text-base font-bold text-forest-950">Mindful habits</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-stone-600">
+          Seeing potential in old objects changes how you look at everything else.
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Closing call to action -->
+<section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6 sm:pb-24" aria-labelledby="cta-heading">
+  <div class="flex flex-col items-start gap-6 rounded-3xl bg-forest-900 p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
+    <div class="max-w-xl">
+      <h2 id="cta-heading" class="font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+        Got something headed for the bin? Give it one more chance.
+      </h2>
+      <p class="mt-3 leading-relaxed text-forest-200/85">
+        Try the upload demo today, and come back soon for AI-powered reuse ideas with full
+        instructions.
+      </p>
+    </div>
+    <div class="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+      <a
+        routerLink="/"
+        fragment="upload"
+        class="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-7 py-3.5 text-base font-semibold text-forest-950 transition-colors hover:bg-white"
+      >
+        <lucide-icon name="camera" [size]="18" aria-hidden="true" />
+        Try the demo
+      </a>
+      <a
+        routerLink="/how-it-works"
+        class="inline-flex items-center justify-center gap-2 rounded-full border border-cream/30 px-7 py-3.5 text-base font-semibold text-cream transition-colors hover:bg-white/10"
+      >
+        How it works
+      </a>
+    </div>
+  </div>
+</section>
