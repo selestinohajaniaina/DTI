@@ -21,6 +21,7 @@
 - `app.config.ts` : providers (routeur + restauration du scroll, icônes, zone).
 - `app.routes.ts` : routes lazy (`loadComponent`) avec `title`.
 - `main.ts` : `bootstrapApplication(App, appConfig)`.
+- `services/api.service.ts` : client HTTP (`HttpClient` fourni dans `app.config.ts`), upload multipart, URLs d'images ; `shared/format.ts` : helpers d'affichage ; `home/tutorial-modal/` : modale tutoriel.
 - Composants standalone, **sans suffixe `Component`** (convention `addTypeToClassName: false`), `templateUrl` externe, sélecteur `app-*` en kebab-case.
 - Templates : syntaxe moderne (`@if`, `@for` avec `track`), signaux (`signal()`).
 
@@ -30,8 +31,8 @@
 - Imports : externes d'abord, puis relatifs, groupes séparés par une ligne vide.
 - Styles : classes utilitaires Tailwind dans les templates ; tokens `forest/leaf/cream` via `@theme` ; ne pas casser `styles.css` ; pas de styles JS inline.
 - Réutiliser `Navbar`, `Footer`, `APP_ICONS`, `APP_INFO` avant de créer.
-- Aucun appel HTTP ni `ApiService` pour l'instant ; aucun usage de `@angular/forms` (inputs natifs + handlers). Si ajoutés : service dédié + intercepteur Bearer, URL backend `http://127.0.0.1:3000` en dev, reactive forms de préférence.
-- UX : suivre les patterns existants — signal `errorMessage` + `role="alert"`, page vide honnête (`results`), bouton désactivé documenté.
+- HTTP via `ApiService` uniquement (base `http://127.0.0.1:3000` en dev, pas d'intercepteur pour l'instant) ; aucun usage de `@angular/forms` (inputs natifs + handlers) ; si formulaires ajoutés, reactive forms de préférence.
+- UX : suivre les patterns existants — signal `errorMessage` + `role="alert"`, page vide honnête (`results`), bouton désactivé documenté, modale tutoriel (bouton + backdrop + Escape pour fermer).
 - Accessibilité et responsive : conserver le niveau actuel (skip link, `aria-hidden` sur icônes décoratives, labels, `:focus-visible`, `prefers-reduced-motion`, breakpoints `sm/md/lg`).
 - Pas de fichiers d'environnement Angular ; en aucun cas des secrets côté frontend.
 

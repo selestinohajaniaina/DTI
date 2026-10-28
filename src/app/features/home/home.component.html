@@ -148,8 +148,8 @@
         Start with a photo
       </h2>
       <p class="mt-3 text-lg leading-relaxed text-stone-600">
-        Drop in a picture of something you no longer need. For now you will see a local preview only
-        — analysis is not connected yet.
+        Drop in a picture of something you no longer need. Preview it, then generate three
+        AI-crafted second-life ideas.
       </p>
     </div>
 
@@ -174,18 +174,27 @@
             </p>
             <p class="mt-1 flex items-center gap-1.5 text-sm text-stone-500">
               <lucide-icon name="check" [size]="15" class="text-forest-700" aria-hidden="true" />
-              Preview ready — this file never left your device.
+              Preview ready — your photo is only sent when you generate ideas.
             </p>
             <div class="mt-5 flex flex-wrap justify-center gap-3">
               <button
                 type="button"
-                disabled
-                title="AI analysis is not connected yet"
-                class="inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-forest-900/40 px-6 py-3 text-sm font-semibold text-white"
-                aria-describedby="analyze-note"
+                (click)="generateIdeas()"
+                [disabled]="isGenerating()"
+                class="inline-flex items-center gap-2 rounded-full bg-forest-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-forest-800 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <lucide-icon name="sparkles" [size]="16" aria-hidden="true" />
-                Analyze with AI
+                @if (isGenerating()) {
+                  <lucide-icon
+                    name="loader-circle"
+                    [size]="16"
+                    class="animate-spin"
+                    aria-hidden="true"
+                  />
+                  Generating ideas…
+                } @else {
+                  <lucide-icon name="sparkles" [size]="16" aria-hidden="true" />
+                  Generate Ideas
+                }
               </button>
               <button
                 type="button"
@@ -196,8 +205,8 @@
                 Remove photo
               </button>
             </div>
-            <p id="analyze-note" class="mt-3 text-xs text-stone-500">
-              Analysis is disabled in this prototype. No image is uploaded anywhere.
+            <p id="generate-note" class="mt-3 text-xs text-stone-500">
+              Sends your photo to the DTI backend, which returns three upcycling ideas.
             </p>
           </div>
         } @else {
@@ -207,7 +216,7 @@
               accept="image/*"
               class="sr-only"
               (change)="onFilesSelected($event)"
-              aria-label="Choose a photo of an object to preview"
+              aria-label="Choose a photo of an object to upcycle"
             />
             <span
               class="flex h-16 w-16 items-center justify-center rounded-2xl bg-forest-900 text-cream"
@@ -230,7 +239,7 @@
                 accept="image/*"
                 class="sr-only"
                 (change)="onFilesSelected($event)"
-                aria-label="Browse files for a photo to preview"
+                aria-label="Browse files for a photo to upcycle"
               />
               <lucide-icon name="upload" [size]="16" aria-hidden="true" />
               Browse files
@@ -244,7 +253,7 @@
                 capture="environment"
                 class="sr-only"
                 (change)="onFilesSelected($event)"
-                aria-label="Take a photo with your camera to preview"
+                aria-label="Take a photo with your camera to upcycle"
               />
               <lucide-icon name="camera" [size]="16" aria-hidden="true" />
               Use camera
@@ -265,6 +274,20 @@
             {{ errorMessage() }}
           </p>
         }
+        @if (generationError()) {
+          <p
+            role="alert"
+            class="mx-auto mt-5 flex max-w-md items-start gap-2 rounded-2xl bg-red-50 p-3.5 text-sm font-medium text-red-800"
+          >
+            <lucide-icon
+              name="circle-alert"
+              [size]="17"
+              class="mt-0.5 shrink-0"
+              aria-hidden="true"
+            />
+            {{ generationError() }}
+          </p>
+        }
       </div>
 
       <aside class="flex flex-col gap-4" aria-label="About this prototype demo">
@@ -276,9 +299,8 @@
             Prototype note
           </p>
           <p class="mt-3 text-sm leading-relaxed text-forest-100/90">
-            This upload area is a visual prototype. Choosing a photo shows a preview generated
-            entirely in your browser — nothing is sent to a server and no suggestions are produced
-            yet.
+            This demo sends your photo to the local DTI backend, which returns three AI-generated
+            upcycling ideas with illustrations and tutorials.
           </p>
         </div>
         <div class="rounded-3xl border border-forest-900/10 bg-white p-6">
@@ -320,6 +342,103 @@
     </div>
   </div>
 </section>
+
+<!-- AI-generated ideas -->
+@if (isGenerating() || ideas()) {
+  <section
+    id="results"
+    aria-labelledby="results-heading"
+    aria-live="polite"
+    class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24"
+  >
+    <div class="max-w-2xl">
+      <h2
+        id="results-heading"
+        class="font-display text-3xl font-semibold tracking-tight text-forest-950 sm:text-4xl"
+      >
+        @if (sourceObject(); as source) {
+          Three second lives for your {{ source.name }}
+        } @else {
+          Crafting your ideas…
+        }
+      </h2>
+      @if (sourceObject(); as source) {
+        <p class="mt-3 text-lg leading-relaxed text-stone-600">
+          Spotted {{ source.material }} · condition: {{ source.condition }}.
+        </p>
+      }
+    </div>
+
+    @if (isGenerating() && !ideas()) {
+      <div
+        role="status"
+        class="mt-10 flex items-center gap-3 rounded-3xl border border-forest-900/10 bg-white p-6 shadow-sm"
+      >
+        <lucide-icon
+          name="loader-circle"
+          [size]="22"
+          class="shrink-0 animate-spin text-forest-700"
+          aria-hidden="true"
+        />
+        <p class="text-sm font-medium text-stone-600">
+          Analyzing your photo and crafting three ideas — this can take a minute.
+        </p>
+      </div>
+    }
+
+    @if (ideas(); as ideasList) {
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        @for (idea of ideasList; track idea.id) {
+          <article
+            class="flex flex-col rounded-3xl border border-forest-900/10 bg-white p-5 shadow-sm"
+          >
+            @if (idea.image.url; as imagePath) {
+              <img
+                [src]="imageSrc(imagePath)"
+                [alt]="idea.title"
+                loading="lazy"
+                class="aspect-[4/3] w-full rounded-2xl object-cover"
+              />
+            } @else {
+              <div
+                class="flex aspect-[4/3] w-full flex-col items-center justify-center gap-2 rounded-2xl bg-parchment px-4 text-center"
+              >
+                <lucide-icon
+                  name="image-plus"
+                  [size]="28"
+                  class="text-forest-400"
+                  aria-hidden="true"
+                />
+                <p class="text-sm text-stone-500">Illustration unavailable for this idea.</p>
+              </div>
+            }
+            <h3 class="mt-4 text-lg font-semibold text-forest-950">{{ idea.title }}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-stone-600">{{ idea.description }}</p>
+            <p class="mt-3 text-sm text-stone-500">
+              <span class="font-medium text-forest-800">{{ idea.difficulty }}</span>
+              <span aria-hidden="true"> · </span>{{ formatMinutes(idea.estimatedMinutes) }}
+            </p>
+            @if (idea.marketPrice.status === 'not_found') {
+              <p class="mt-1 text-sm text-stone-500">No verified market price available.</p>
+            }
+            <div class="mt-auto pt-4">
+              <button
+                type="button"
+                (click)="openTutorial(idea)"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-forest-700 px-5 py-2.5 text-sm font-semibold text-forest-800 transition hover:bg-forest-700 hover:text-white"
+              >
+                View Tutorial
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  </section>
+}
+@if (activeTutorial(); as tutorial) {
+  <app-tutorial-modal [idea]="tutorial" (closed)="closeTutorial()" />
+}
 
 <!-- Example transformations -->
 <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24" aria-labelledby="examples-heading">

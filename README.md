@@ -1,15 +1,16 @@
 # DTI — Don't Trash It
 
 AI-powered upcycling platform: photograph an unwanted object and discover creative,
-eco-friendly ways to reuse it. This repository currently holds the **frontend
-foundation** (Angular + Tailwind CSS) with a polished landing page. AI integration,
-backend, and authentication are intentionally out of scope for now.
+eco-friendly ways to reuse it. This repository holds the **frontend**
+(Angular + Tailwind CSS) with a working photo-to-ideas prototype connected to
+the DTI backend. Authentication is intentionally out of scope for now.
 
 ## Stack
 
 - Angular 21 (standalone components, Router, signals) + TypeScript (strict)
 - Tailwind CSS v4 (PostCSS plugin, CSS-first `@theme` tokens)
 - Lucide icons via `lucide-angular` (central registry in `src/app/shared/icons.ts`)
+- HTTP via Angular `HttpClient` (`src/app/services/api.service.ts`)
 - Unit tests with Vitest (`npm test`)
 
 ## Prerequisites
@@ -37,9 +38,12 @@ src/
     core/                 # app-wide constants & future configuration
     shared/
       icons.ts            # Lucide icon registry (register once, use anywhere)
+      format.ts           # shared display helpers
       components/         # navbar, footer
+    services/
+      api.service.ts      # backend client (photo upload, ideas, image URLs)
     features/
-      home/               # landing page + upload prototype (local preview only)
+      home/               # landing page + upload, AI results, tutorial modal
       results/            # placeholder for the future suggestions interface
       how-it-works/       # process explanation + project roadmap
     app.config.ts         # router (scroll restoration), icons, zoned change detection
@@ -49,7 +53,8 @@ src/
 
 ## Prototype notes
 
-- The upload area shows a **local-only preview** (FileReader, no server involved);
-  the "Analyze with AI" action stays disabled until a backend exists.
+- The upload area previews locally (FileReader); "Generate Ideas" sends the photo
+  to `POST http://127.0.0.1:3000/api/ai/generate-ideas` (backend must be running).
 - The `/results` page is an honest empty state — no fake AI output.
-- No API keys, secrets, or backend code exist in this project yet.
+- No API keys or secrets exist in this project: `MODEL_API_KEY` lives on the
+  backend only; the frontend uploads photos and displays results.
