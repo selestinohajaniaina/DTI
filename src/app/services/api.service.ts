@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, type Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface TutorialStepDto {
   step: number;
@@ -58,7 +59,7 @@ interface ApiEnvelope<T> {
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://127.0.0.1:3000';
+  private readonly baseUrl = environment.baseUrl;
 
   generateIdeas(image: File): Observable<GenerateIdeasResult> {
     const form = new FormData();
