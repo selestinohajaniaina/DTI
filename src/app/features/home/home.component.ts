@@ -87,7 +87,7 @@ export class Home {
     {
       icon: 'scan-search',
       title: 'Discover possibilities',
-      text: 'DTI will analyze the object and suggest creative, practical ways to give it a second life.',
+      text: 'DTI analyzes the object and suggests creative, practical ways to give it a second life.',
     },
     {
       icon: 'hammer',

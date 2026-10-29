@@ -14,7 +14,7 @@ describe('Results', () => {
     }).compileComponents();
   });
 
-  it('should create the results placeholder page', () => {
+  it('should create the results empty-state page', () => {
     const fixture = TestBed.createComponent(Results);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;

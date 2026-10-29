@@ -2,7 +2,7 @@
 
 AI-powered upcycling platform: photograph an unwanted object and discover creative,
 eco-friendly ways to reuse it. This repository holds the **frontend**
-(Angular + Tailwind CSS) with a working photo-to-ideas prototype connected to
+(Angular + Tailwind CSS) with a working photo-to-ideas flow connected to
 the DTI backend. Authentication is intentionally out of scope for now.
 
 ## Stack
@@ -44,14 +44,14 @@ src/
       api.service.ts      # backend client (photo upload, ideas, image URLs)
     features/
       home/               # landing page + upload, AI results, tutorial modal
-      results/            # placeholder for the future suggestions interface
-      how-it-works/       # process explanation + project roadmap
+      results/            # empty state shown before ideas are generated
+      how-it-works/       # process explanation
     app.config.ts         # router (scroll restoration), icons, zoned change detection
     app.routes.ts         # lazy-loaded routes
   styles.css              # Tailwind v4 theme + global foundation
 ```
 
-## Prototype notes
+## Behavior notes
 
 - The upload area previews locally (FileReader); "Generate Ideas" sends the photo
   to `POST http://127.0.0.1:3000/api/ai/generate-ideas` (backend must be running).

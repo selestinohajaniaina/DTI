@@ -3,8 +3,8 @@ import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 /**
- * Placeholder for the future reuse-suggestions interface.
- * Intentionally shows an empty state — no fake AI results.
+ * Empty state shown when the user opens /results before generating ideas.
+ * Points to the home upload instead of showing fake AI results.
  */
 @Component({
   selector: 'app-results',
@@ -12,7 +12,7 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './results.component.html',
 })
 export class Results {
-  protected readonly upcoming = [
+  protected readonly included = [
     {
       icon: 'scan-search',
       title: 'Ideas matched to your photo',

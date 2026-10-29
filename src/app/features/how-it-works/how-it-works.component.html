@@ -10,8 +10,8 @@
       From forgotten object to favorite thing
     </h1>
     <p class="mt-4 text-lg leading-relaxed text-stone-600">
-      DTI is being built around one simple loop: photograph what you have, discover what it could
-      become, and make it happen. Here is how the full experience will work.
+      DTI is built around one simple loop: photograph what you have, discover what it could become,
+      and make it happen. Here is how the experience works.
     </p>
   </div>
 
@@ -49,72 +49,12 @@
     }
   </ol>
 
-  <section class="mt-16" aria-labelledby="roadmap-heading">
-    <h2
-      id="roadmap-heading"
-      class="font-display text-2xl font-semibold tracking-tight text-forest-950 sm:text-3xl"
-    >
-      Where the project stands
-    </h2>
-    <p class="mt-2 max-w-2xl leading-relaxed text-stone-600">
-      An honest look at what exists today and what comes next. Nothing below is presented as
-      finished before it is.
-    </p>
-    <ol class="mt-8 grid gap-4 md:grid-cols-3">
-      @for (item of roadmap; track item.title; let i = $index) {
-        <li
-          class="rounded-3xl border p-6"
-          [class.border-forest-700]="item.current"
-          [class.bg-forest-900]="item.current"
-          [class.text-cream]="item.current"
-          [class.border-forest-900/10]="!item.current"
-          [class.bg-white]="!item.current"
-        >
-          <div class="flex items-center justify-between">
-            <lucide-icon
-              [name]="item.icon"
-              [size]="24"
-              [class.text-leaf-400]="item.current"
-              [class.text-forest-700]="!item.current"
-              aria-hidden="true"
-            />
-            @if (item.current) {
-              <span class="rounded-full bg-cream/15 px-3 py-1 text-xs font-semibold"
-                >You are here</span
-              >
-            } @else {
-              <span class="text-xs font-semibold uppercase tracking-wider text-stone-400"
-                >Step {{ i + 1 }}</span
-              >
-            }
-          </div>
-          <h3
-            class="mt-4 text-lg font-bold"
-            [class.text-white]="item.current"
-            [class.text-forest-950]="!item.current"
-          >
-            {{ item.title }}
-          </h3>
-          <p
-            class="mt-1.5 text-sm leading-relaxed"
-            [class.text-forest-200/85]="item.current"
-            [class.text-stone-600]="!item.current"
-          >
-            {{ item.text }}
-          </p>
-        </li>
-      }
-    </ol>
-  </section>
-
   <div
     class="mt-12 flex flex-col items-start gap-4 rounded-3xl bg-forest-50 p-8 sm:flex-row sm:items-center sm:justify-between"
   >
     <div>
-      <h2 class="text-xl font-bold text-forest-950">See the starting point</h2>
-      <p class="mt-1 text-stone-600">
-        Try the upload preview on the home page — no account needed.
-      </p>
+      <h2 class="text-xl font-bold text-forest-950">Try it yourself</h2>
+      <p class="mt-1 text-stone-600">Upload a photo on the home page — no account needed.</p>
     </div>
     <a
       routerLink="/"
@@ -122,7 +62,7 @@
       class="inline-flex shrink-0 items-center gap-2 rounded-full bg-forest-900 px-7 py-3 text-base font-semibold text-white transition-colors hover:bg-forest-800"
     >
       <lucide-icon name="upload" [size]="18" aria-hidden="true" />
-      Go to the demo
+      Upload a photo
     </a>
   </div>
 </div>
