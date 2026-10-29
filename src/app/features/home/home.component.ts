@@ -1,16 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 import { APP_INFO } from '../../core/app-info';
 import { ApiService, type GeneratedIdea, type SourceObjectDto } from '../../services/api.service';
-import {
-  formatMinutes as formatMinutesFn,
-  formatPrice as formatPriceFn,
-} from '../../shared/format';
 import { TutorialModal } from './tutorial-modal/tutorial-modal.component';
+import { CardGeneratedIdea } from '../../components/card-generated-idea/card-generated-idea.component';
 
 interface TransformationExample {
   from: string;
@@ -31,10 +28,12 @@ interface Step {
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, LucideAngularModule, TutorialModal],
+  imports: [RouterLink, LucideAngularModule, TutorialModal, CardGeneratedIdea],
   templateUrl: './home.component.html',
 })
 export class Home {
+  private resultsSection = viewChild<ElementRef<HTMLElement>>('resultsSection');
+
   protected readonly sloganLines = [
     'One photo.',
     'Endless possibilities.',
@@ -106,8 +105,6 @@ export class Home {
   protected readonly ideas = signal<GeneratedIdea[] | null>(null);
   protected readonly sourceObject = signal<SourceObjectDto | null>(null);
   protected readonly activeTutorial = signal<GeneratedIdea | null>(null);
-  protected readonly formatMinutes = formatMinutesFn;
-  protected readonly formatPrice = formatPriceFn;
 
   private readonly api = inject(ApiService);
   private readonly destroyRef = inject(DestroyRef);
@@ -147,6 +144,7 @@ export class Home {
   }
 
   protected generateIdeas(): void {
+    this.scrollToResults();
     const file = this.selectedFile();
     if (!file || this.isGenerating()) {
       return;
@@ -178,15 +176,13 @@ export class Home {
     this.activeTutorial.set(null);
   }
 
-  protected imageSrc(path: string | null): string | null {
-    return this.api.imageUrl(path);
-  }
-
   private scrollToResults(): void {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document
-      .getElementById('results')
-      ?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+    setTimeout(() => {
+      this.resultsSection()?.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    });
   }
 
   private toUserMessage(error: unknown): string {
