@@ -6,7 +6,10 @@ import { LucideAngularModule } from 'lucide-angular';
 
 import { APP_INFO } from '../../core/app-info';
 import { ApiService, type GeneratedIdea, type SourceObjectDto } from '../../services/api.service';
-import { formatMinutes as formatMinutesFn } from '../../shared/format';
+import {
+  formatMinutes as formatMinutesFn,
+  formatPrice as formatPriceFn,
+} from '../../shared/format';
 import { TutorialModal } from './tutorial-modal/tutorial-modal.component';
 
 interface TransformationExample {
@@ -104,6 +107,7 @@ export class Home {
   protected readonly sourceObject = signal<SourceObjectDto | null>(null);
   protected readonly activeTutorial = signal<GeneratedIdea | null>(null);
   protected readonly formatMinutes = formatMinutesFn;
+  protected readonly formatPrice = formatPriceFn;
 
   private readonly api = inject(ApiService);
   private readonly destroyRef = inject(DestroyRef);

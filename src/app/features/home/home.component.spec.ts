@@ -19,11 +19,10 @@ const MOCK_RESULT: GenerateIdeasResult = {
     estimatedMinutes: 15,
     image: { url: `/uploads/generated/idea-${index}.png`, status: 'completed' as const },
     marketPrice: {
-      status: 'not_found' as const,
-      amount: null,
-      currency: null,
-      sourceUrl: null,
-      listingTitle: null,
+      status: 'estimated' as const,
+      currency: 'MGA' as const,
+      estimatedCost: 800 * index,
+      estimatedSellingPrice: 3000 * index,
     },
     tutorial: {
       materials: ['Paint'],
@@ -44,6 +43,17 @@ describe('Home', () => {
         provideHttpClient(),
       ],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
+    // The test DOM lacks these browser APIs, exercised by scrollToResults()
+    // after every successful generation.
+    Object.defineProperty(window, 'matchMedia', {
+      value: () => ({ matches: false }) as MediaQueryList,
+      configurable: true,
+      writable: true,
+    });
+    Element.prototype.scrollIntoView = () => undefined;
   });
 
   it('should create the home page', () => {
@@ -103,6 +113,96 @@ describe('Home', () => {
       const cards = (fixture.nativeElement as HTMLElement).querySelectorAll('#results article');
       expect(cards.length).toBe(3);
       expect(cards[0]?.querySelector('h3')?.textContent).toContain('Idea 1');
+    } finally {
+      http.verify();
+    }
+  });
+
+  it('should render estimated prices on each idea card', async () => {
+    TestBed.configureTestingModule({
+      imports: [Home],
+      providers: [
+        provideRouter([]),
+        importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
+    });
+    await TestBed.compileComponents();
+    const http = TestBed.inject(HttpTestingController);
+    try {
+      const fixture = TestBed.createComponent(Home);
+      fixture.detectChanges();
+      selectPhoto(fixture.nativeElement as HTMLElement);
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const button = Array.from(
+        (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+      ).find((entry) => entry.textContent?.includes('Generate Ideas'));
+      button?.click();
+
+      const req = http.expectOne('http://127.0.0.1:3000/api/ai/generate-ideas');
+      req.flush({ success: true, data: MOCK_RESULT });
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const cards = (fixture.nativeElement as HTMLElement).querySelectorAll('#results article');
+      expect(cards.length).toBe(3);
+      const firstCard = cards[0]?.textContent ?? '';
+      expect(firstCard).toContain('Estimated selling price');
+      expect(firstCard).toContain('Ar 3,000');
+      expect(firstCard).toContain('Estimated cost to make');
+      expect(firstCard).toContain('Ar 800');
+    } finally {
+      http.verify();
+    }
+  });
+
+  it('should handle null prices without breaking the idea cards', async () => {
+    TestBed.configureTestingModule({
+      imports: [Home],
+      providers: [
+        provideRouter([]),
+        importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
+    });
+    await TestBed.compileComponents();
+    const http = TestBed.inject(HttpTestingController);
+    try {
+      const fixture = TestBed.createComponent(Home);
+      fixture.detectChanges();
+      selectPhoto(fixture.nativeElement as HTMLElement);
+      await fixture.whenStable();
+      fixture.detectChanges();
+
+      const button = Array.from(
+        (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+      ).find((entry) => entry.textContent?.includes('Generate Ideas'));
+      button?.click();
+
+      const nullPrices: GenerateIdeasResult = {
+        ...MOCK_RESULT,
+        ideas: MOCK_RESULT.ideas.map((idea) => ({
+          ...idea,
+          marketPrice: {
+            status: 'estimated' as const,
+            currency: 'MGA' as const,
+            estimatedCost: null,
+            estimatedSellingPrice: null,
+          },
+        })),
+      };
+      const req = http.expectOne('http://127.0.0.1:3000/api/ai/generate-ideas');
+      req.flush({ success: true, data: nullPrices });
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const cards = (fixture.nativeElement as HTMLElement).querySelectorAll('#results article');
+      expect(cards.length).toBe(3);
+      expect(cards[0]?.textContent).toContain('Not available');
     } finally {
       http.verify();
     }

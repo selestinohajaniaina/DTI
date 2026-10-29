@@ -22,11 +22,10 @@ export interface IdeaImageDto {
 }
 
 export interface MarketPriceDto {
-  status: 'not_found';
-  amount: null;
-  currency: null;
-  sourceUrl: null;
-  listingTitle: null;
+  status: 'estimated';
+  currency: 'MGA';
+  estimatedCost: number | null;
+  estimatedSellingPrice: number | null;
 }
 
 export interface GeneratedIdea {

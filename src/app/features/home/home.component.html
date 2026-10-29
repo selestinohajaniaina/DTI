@@ -418,7 +418,16 @@
               <span class="font-medium text-forest-800">{{ idea.difficulty }}</span>
               <span aria-hidden="true"> · </span>{{ formatMinutes(idea.estimatedMinutes) }}
             </p>
-            @if (idea.marketPrice.status === 'not_found') {
+            @if (idea.marketPrice.status === 'estimated') {
+              <p class="mt-1 text-sm text-stone-500">
+                Estimated selling price:
+                {{ formatPrice(idea.marketPrice.estimatedSellingPrice, idea.marketPrice.currency) }}
+              </p>
+              <p class="mt-1 text-sm text-stone-500">
+                Estimated cost to make:
+                {{ formatPrice(idea.marketPrice.estimatedCost, idea.marketPrice.currency) }}
+              </p>
+            } @else {
               <p class="mt-1 text-sm text-stone-500">No verified market price available.</p>
             }
             <div class="mt-auto pt-4">
