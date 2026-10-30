@@ -1,0 +1,265 @@
+<div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+  <div class="max-w-2xl">
+    <h1 class="font-display text-4xl font-semibold tracking-tight text-forest-950 sm:text-5xl">
+      Generated Ideas
+    </h1>
+    <p class="mt-3 text-lg leading-relaxed text-stone-600">
+      Rediscover your ideas and explore new possibilities for the objects you have saved.
+    </p>
+  </div>
+
+  <form
+    class="mt-8 rounded-3xl border border-forest-900/10 bg-white p-5 shadow-sm"
+    (submit)="$event.preventDefault()"
+    aria-label="Search and filter ideas"
+  >
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <div class="relative flex-1">
+        <label class="sr-only" for="library-search">Search ideas</label>
+        <lucide-icon
+          name="scan-search"
+          [size]="18"
+          class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"
+          aria-hidden="true"
+        />
+        <input
+          id="library-search"
+          type="search"
+          autocomplete="off"
+          placeholder="Search by title, description, or object…"
+          [value]="searchInput()"
+          (input)="onSearchInput($any($event.target).value)"
+          class="w-full rounded-full border border-forest-900/15 bg-cream py-3 pl-11 pr-11 text-base text-forest-950 placeholder:text-stone-400 [&::-webkit-search-cancel-button]:hidden"
+        />
+        @if (searchInput() !== '') {
+          <button
+            type="button"
+            (click)="clearSearch()"
+            aria-label="Clear search"
+            class="absolute right-3 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-stone-500 transition-colors hover:bg-forest-900/5 hover:text-forest-900"
+          >
+            <lucide-icon name="x" [size]="16" aria-hidden="true" />
+          </button>
+        }
+      </div>
+      <button
+        type="button"
+        (click)="resetFilters()"
+        class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-forest-700 px-5 py-2.5 text-sm font-semibold text-forest-800 transition hover:bg-forest-700 hover:text-white"
+      >
+        Reset filters
+      </button>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      @if (sourceObjects().length > 0) {
+        <div>
+          <label
+            class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-stone-500"
+            for="library-source"
+          >
+            Object
+          </label>
+          <select
+            id="library-source"
+            [value]="sourceObjectId()"
+            (change)="onSourceChange($any($event.target).value)"
+            class="w-full rounded-xl border border-forest-900/15 bg-cream px-3.5 py-2.5 text-sm font-medium text-forest-950"
+          >
+            <option value="">All objects</option>
+            @for (source of sourceObjects(); track source.id) {
+              <option [value]="source.id">{{ source.name }}</option>
+            }
+          </select>
+        </div>
+      }
+      <div>
+        <label
+          class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-stone-500"
+          for="library-difficulty"
+        >
+          Difficulty
+        </label>
+        <select
+          id="library-difficulty"
+          [value]="difficulty()"
+          (change)="onDifficultyChange($any($event.target).value)"
+          class="w-full rounded-xl border border-forest-900/15 bg-cream px-3.5 py-2.5 text-sm font-medium text-forest-950"
+        >
+          <option value="">All levels</option>
+          @for (level of difficulties; track level) {
+            <option [value]="level">{{ level }}</option>
+          }
+        </select>
+      </div>
+      <div>
+        <label
+          class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-stone-500"
+          for="library-price"
+        >
+          Price
+        </label>
+        <select
+          id="library-price"
+          [value]="priceFilter()"
+          (change)="onPriceFilterChange($any($event.target).value)"
+          class="w-full rounded-xl border border-forest-900/15 bg-cream px-3.5 py-2.5 text-sm font-medium text-forest-950"
+        >
+          <option value="all">With or without price</option>
+          <option value="with">With price only</option>
+          <option value="without">Without price</option>
+        </select>
+      </div>
+      <div>
+        <label
+          class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-stone-500"
+          for="library-sort"
+        >
+          Sort by
+        </label>
+        <select
+          id="library-sort"
+          [value]="sort()"
+          (change)="onSortChange($any($event.target).value)"
+          class="w-full rounded-xl border border-forest-900/15 bg-cream px-3.5 py-2.5 text-sm font-medium text-forest-950"
+        >
+          @for (option of sortOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <div #resultsTop class="scroll-mt-24">
+    @if (loading()) {
+      <div role="status" class="mt-10">
+        <span class="sr-only">Loading ideas…</span>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-hidden="true">
+          @for (slot of skeletonSlots(); track slot) {
+            <div class="rounded-3xl border border-forest-900/10 bg-white p-5 shadow-sm">
+              <div class="aspect-[4/3] w-full animate-pulse rounded-2xl bg-parchment"></div>
+              <div class="mt-4 h-5 w-2/3 animate-pulse rounded-full bg-parchment"></div>
+              <div class="mt-2 h-4 w-full animate-pulse rounded-full bg-parchment"></div>
+              <div class="mt-2 h-4 w-1/2 animate-pulse rounded-full bg-parchment"></div>
+            </div>
+          }
+        </div>
+      </div>
+    } @else if (error(); as message) {
+      <div
+        role="alert"
+        class="mt-10 rounded-3xl border border-red-900/15 bg-white p-8 text-center shadow-sm"
+      >
+        <p class="mx-auto max-w-md leading-relaxed text-stone-600">{{ message }}</p>
+        <button
+          type="button"
+          (click)="retry()"
+          class="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-forest-900 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800"
+        >
+          Try again
+        </button>
+      </div>
+    } @else if (ideas().length === 0) {
+      @if (hasActiveCriteria()) {
+        <div
+          class="mt-10 rounded-3xl border border-forest-900/10 bg-white p-8 text-center shadow-sm"
+        >
+          <h2 class="font-display text-2xl font-semibold tracking-tight text-forest-950">
+            No ideas match your search.
+          </h2>
+          <p class="mx-auto mt-2 max-w-md leading-relaxed text-stone-600">
+            Try different keywords or clear your search and filters to browse everything.
+          </p>
+          <button
+            type="button"
+            (click)="resetFilters()"
+            class="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-forest-900 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800"
+          >
+            Clear search and filters
+          </button>
+        </div>
+      } @else {
+        <div
+          class="mt-10 rounded-3xl border border-forest-900/10 bg-white p-8 text-center shadow-sm"
+        >
+          <h2 class="font-display text-2xl font-semibold tracking-tight text-forest-950">
+            No generated ideas yet.
+          </h2>
+          <p class="mx-auto mt-2 max-w-md leading-relaxed text-stone-600">
+            Upload a photo of something you no longer need and your ideas will appear here.
+          </p>
+          <a
+            routerLink="/"
+            fragment="upload"
+            class="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-forest-900 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800"
+          >
+            <lucide-icon name="upload" [size]="16" aria-hidden="true" />
+            Generate ideas
+          </a>
+        </div>
+      }
+    } @else {
+      <p class="mt-10 text-sm font-medium text-stone-500" aria-live="polite">
+        @if (total() === 1) {
+          1 idea
+        } @else {
+          {{ total() }} ideas
+        }
+      </p>
+      <div class="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        @for (idea of ideas(); track idea.id) {
+          <app-card-generated-idea
+            [idea]="idea"
+            [sourceName]="idea.sourceObject.name"
+            [createdAt]="idea.createdAt"
+            (tutorielIdeaEmiter)="openTutorial($event)"
+          />
+        }
+      </div>
+      @if (totalPages() > 1) {
+        <nav
+          class="mt-8 flex flex-wrap items-center justify-center gap-3"
+          aria-label="Library pages"
+        >
+          <button
+            type="button"
+            (click)="goToPage(page() - 1)"
+            [disabled]="page() <= 1"
+            class="inline-flex items-center gap-2 rounded-full border-2 border-forest-700 px-5 py-2 text-sm font-semibold text-forest-800 transition enabled:hover:bg-forest-700 enabled:hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Previous
+          </button>
+          <p class="text-sm font-medium text-stone-600" aria-live="polite">
+            Page {{ page() }} of {{ totalPages() }}
+          </p>
+          <button
+            type="button"
+            (click)="goToPage(page() + 1)"
+            [disabled]="page() >= totalPages()"
+            class="inline-flex items-center gap-2 rounded-full border-2 border-forest-700 px-5 py-2 text-sm font-semibold text-forest-800 transition enabled:hover:bg-forest-700 enabled:hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Next
+          </button>
+          <label class="ml-1 inline-flex items-center gap-2 text-sm font-medium text-stone-600">
+            Per page
+            <select
+              [value]="limit()"
+              (change)="onLimitChange($any($event.target).value)"
+              aria-label="Ideas per page"
+              class="rounded-xl border border-forest-900/15 bg-white px-3 py-2 text-sm font-medium text-forest-950"
+            >
+              @for (size of pageSizeOptions; track size) {
+                <option [value]="size">{{ size }}</option>
+              }
+            </select>
+          </label>
+        </nav>
+      }
+    }
+  </div>
+</div>
+
+@if (activeTutorial(); as tutorial) {
+  <app-tutorial-modal [idea]="tutorial" (closed)="closeTutorial()" />
+}

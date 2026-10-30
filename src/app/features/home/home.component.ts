@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import type { ElementRef } from '@angular/core';
 import { Component, DestroyRef, computed, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -8,6 +7,7 @@ import { Subscription, interval, timer } from 'rxjs';
 
 import { APP_INFO } from '../../core/app-info';
 import { ApiService, type GeneratedIdea, type SourceObjectDto } from '../../services/api.service';
+import { toUserMessage as toUserMessageFn } from '../../shared/http-errors';
 import { TutorialModal } from './tutorial-modal/tutorial-modal.component';
 import { CardGeneratedIdea } from '../../components/card-generated-idea/card-generated-idea.component';
 
@@ -340,7 +340,12 @@ export class Home {
         error: (error: unknown) => {
           this.isGenerating.set(false);
           this.stopLoadingMessages();
-          this.generationError.set(this.toUserMessage(error));
+          this.generationError.set(
+            toUserMessageFn(error, {
+              unreachable: 'Cannot reach the DTI server. Is the backend running?',
+              generic: 'Something went wrong while generating ideas. Please try again.',
+            }),
+          );
         },
       });
   }
@@ -421,20 +426,6 @@ export class Home {
         block: 'start',
       });
     });
-  }
-
-  private toUserMessage(error: unknown): string {
-    if (error instanceof HttpErrorResponse) {
-      const envelope = error.error as { error?: { message?: unknown } } | null;
-      const backendMessage = envelope?.error?.message;
-      if (typeof backendMessage === 'string' && backendMessage.length > 0) {
-        return backendMessage;
-      }
-      if (error.status === 0) {
-        return 'Cannot reach the DTI server. Is the backend running?';
-      }
-    }
-    return 'Something went wrong while generating ideas. Please try again.';
   }
 
   private handleFiles(files: FileList | null): void {

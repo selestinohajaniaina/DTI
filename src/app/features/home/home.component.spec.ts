@@ -13,6 +13,7 @@ import { Home } from './home.component';
 
 const MOCK_RESULT: GenerateIdeasResult = {
   sourceObject: { name: 'Cup', material: 'plastic', condition: 'reusable' },
+  anonymousOwnerId: null,
   ideas: [1, 2, 3].map((index) => ({
     id: `idea-${index}`,
     title: `Idea ${index}`,
@@ -154,8 +155,9 @@ describe('Home', () => {
       const firstCard = cards[0]?.textContent ?? '';
       expect(firstCard).toContain('Estimated selling price');
       expect(firstCard).toContain('Ar 3,000');
-      expect(firstCard).toContain('Estimated cost to make');
-      expect(firstCard).toContain('Ar 800');
+      // Cost display was deliberately removed from the card (selling price
+      // only); lock that contract instead of the stale assertion.
+      expect(firstCard).not.toContain('Estimated cost to make');
     } finally {
       http.verify();
     }

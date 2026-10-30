@@ -13,6 +13,12 @@ export const routes: Routes = [
     title: 'How it works — DTI',
   },
   {
+    path: 'generated-ideas',
+    loadComponent: () =>
+      import('./features/generated-ideas/generated-ideas.component').then((m) => m.GeneratedIdeas),
+    title: 'Generated Ideas — DTI',
+  },
+  {
     path: 'results',
     loadComponent: () => import('./features/results/results.component').then((m) => m.Results),
     title: 'Results — DTI',

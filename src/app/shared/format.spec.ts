@@ -1,4 +1,14 @@
-import { formatPrice } from './format';
+import { formatDate, formatPrice } from './format';
+
+describe('formatDate', () => {
+  it('formats ISO dates in US style', () => {
+    expect(formatDate('2026-03-04T00:00:00.000Z')).toBe('Mar 4, 2026');
+  });
+
+  it('renders invalid input as Unknown date', () => {
+    expect(formatDate('garbage')).toBe('Unknown date');
+  });
+});
 
 describe('formatPrice', () => {
   it('formats ariary amounts with the Ar symbol', () => {

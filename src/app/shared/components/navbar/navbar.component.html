@@ -35,6 +35,13 @@
       >
         How It Works
       </a>
+      <a
+        routerLink="/generated-ideas"
+        routerLinkActive="bg-forest-900/5 text-forest-900"
+        class="rounded-full px-4 py-2 text-sm font-semibold text-stone-600 transition-colors hover:bg-forest-900/5 hover:text-forest-900"
+      >
+        Generated Ideas
+      </a>
     </div>
 
     <div class="flex items-center gap-2">
@@ -81,6 +88,14 @@
         class="block rounded-xl px-4 py-3 text-base font-semibold text-stone-700 hover:bg-forest-900/5"
       >
         How It Works
+      </a>
+      <a
+        routerLink="/generated-ideas"
+        routerLinkActive="bg-forest-900/5 text-forest-900"
+        (click)="closeMenu()"
+        class="block rounded-xl px-4 py-3 text-base font-semibold text-stone-700 hover:bg-forest-900/5"
+      >
+        Generated Ideas
       </a>
       <a
         routerLink="/"

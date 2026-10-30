@@ -17,7 +17,7 @@
 
 - `src/app/core/` : constantes applicatives (`app-info.ts`).
 - `src/app/shared/` : `icons.ts` + `components/{navbar,footer}/`.
-- `src/app/features/{home,results,how-it-works}/` : un dossier par page.
+- `src/app/features/{home,results,how-it-works,generated-ideas}/` : un dossier par page.
 - `app.config.ts` : providers (routeur + restauration du scroll, icônes, zone).
 - `app.routes.ts` : routes lazy (`loadComponent`) avec `title`.
 - `main.ts` : `bootstrapApplication(App, appConfig)`.

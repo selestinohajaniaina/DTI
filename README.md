@@ -46,6 +46,7 @@ src/
       home/               # landing page + upload, AI results, tutorial modal
       results/            # empty state shown before ideas are generated
       how-it-works/       # process explanation
+      generated-ideas/    # saved ideas library (search, filters, sort, pagination)
     app.config.ts         # router (scroll restoration), icons, zoned change detection
     app.routes.ts         # lazy-loaded routes
   styles.css              # Tailwind v4 theme + global foundation

@@ -15,6 +15,24 @@ const CURRENCY_SYMBOLS: Record<string, string> = {
 };
 
 /**
+ * Formats an ISO date as "Oct 29, 2026" in UTC so the displayed day never
+ * depends on the viewer's timezone. Invalid input renders as "Unknown
+ * date" instead of crashing.
+ */
+export function formatDate(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return 'Unknown date';
+  }
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(date);
+}
+
+/**
  * Formats an estimated price from its `marketPrice` fields, e.g. "Ar 3,000".
  * Missing or invalid values render as "Not available" instead of crashing.
  */
