@@ -23,9 +23,9 @@ const MOCK_RESULT: GenerateIdeasResult = {
     image: { url: `/uploads/generated/idea-${index}.png`, status: 'completed' as const },
     marketPrice: {
       status: 'estimated' as const,
-      currency: 'MGA' as const,
-      estimatedCost: 800 * index,
-      estimatedSellingPrice: 3000 * index,
+      currency: 'USD' as const,
+      estimatedCost: 2 * index + 0.5,
+      estimatedSellingPrice: 8 * index,
     },
     tutorial: {
       materials: ['Paint'],
@@ -154,7 +154,7 @@ describe('Home', () => {
       expect(cards.length).toBe(3);
       const firstCard = cards[0]?.textContent ?? '';
       expect(firstCard).toContain('Estimated selling price');
-      expect(firstCard).toContain('Ar 3,000');
+      expect(firstCard).toContain('$8.00');
       // Cost display was deliberately removed from the card (selling price
       // only); lock that contract instead of the stale assertion.
       expect(firstCard).not.toContain('Estimated cost to make');
@@ -193,7 +193,7 @@ describe('Home', () => {
           ...idea,
           marketPrice: {
             status: 'estimated' as const,
-            currency: 'MGA' as const,
+            currency: 'USD' as const,
             estimatedCost: null,
             estimatedSellingPrice: null,
           },

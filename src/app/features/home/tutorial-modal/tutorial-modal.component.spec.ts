@@ -15,9 +15,9 @@ const IDEA: GeneratedIdea = {
   image: { url: null, status: 'failed' },
   marketPrice: {
     status: 'estimated',
-    currency: 'MGA',
-    estimatedCost: 800,
-    estimatedSellingPrice: 3000,
+    currency: 'USD',
+    estimatedCost: 2.5,
+    estimatedSellingPrice: 8,
   },
   tutorial: {
     materials: ['Clean cup'],

@@ -25,9 +25,9 @@ function makeIdea(overrides: Partial<LibraryIdea> = {}): LibraryIdea {
     image: { url: '/uploads/generated/vase.png', status: 'completed' },
     marketPrice: {
       status: 'estimated',
-      currency: 'MGA',
-      estimatedCost: 800,
-      estimatedSellingPrice: 3000,
+      currency: 'USD',
+      estimatedCost: 2.5,
+      estimatedSellingPrice: 8,
     },
     tutorial: {
       materials: ['Cup'],
@@ -326,7 +326,7 @@ describe('GeneratedIdeas', () => {
           image: { url: null, status: 'failed' },
           marketPrice: {
             status: 'estimated',
-            currency: 'MGA',
+            currency: 'USD',
             estimatedCost: null,
             estimatedSellingPrice: null,
           },

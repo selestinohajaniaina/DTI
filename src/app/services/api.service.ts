@@ -23,7 +23,7 @@ export interface IdeaImageDto {
 
 export interface MarketPriceDto {
   status: 'estimated';
-  currency: 'MGA';
+  currency: 'USD';
   estimatedCost: number | null;
   estimatedSellingPrice: number | null;
 }
@@ -120,7 +120,7 @@ export class ApiService {
 
   listIdeas(query: LibraryIdeasQuery): Observable<LibraryPage> {
     let params = new HttpParams()
-      .set('sort', query.sort)
+      // .set('sort', query.sort)
       .set('page', String(query.page))
       .set('limit', String(query.limit));
     if (query.q !== undefined && query.q.length > 0) {

@@ -17,9 +17,9 @@ const MOCK_IDEA: GeneratedIdea = {
   image: { url: '/uploads/generated/vase.png', status: 'completed' },
   marketPrice: {
     status: 'estimated',
-    currency: 'MGA',
-    estimatedCost: 800,
-    estimatedSellingPrice: 3000,
+    currency: 'USD',
+    estimatedCost: 2.5,
+    estimatedSellingPrice: 8,
   },
   tutorial: { materials: [], tools: [], steps: [], safetyNotes: [] },
 };
@@ -48,6 +48,7 @@ describe('CardGeneratedIdea', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h3')?.textContent).toContain('Mini Vase');
     expect(compiled.textContent).toContain('Estimated selling price');
+    expect(compiled.textContent).toContain('$8.00');
     expect(compiled.textContent).toContain('View Tutorial');
   });
 

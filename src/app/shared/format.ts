@@ -8,11 +8,8 @@ export function formatMinutes(minutes: number): string {
   return rest === 0 ? `${hours} h` : `${hours} h ${rest} min`;
 }
 
-/** Display symbols keyed by the `marketPrice.currency` field (never hard-coded per call site). */
-const CURRENCY_SYMBOLS: Record<string, string> = {
-  MGA: 'Ar',
-  USD: '$',
-};
+/** Central USD formatter for every estimated price (never hard-coded per call site). */
+const usdFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
 /**
  * Formats an ISO date as "Oct 29, 2026" in UTC so the displayed day never
@@ -33,17 +30,12 @@ export function formatDate(iso: string): string {
 }
 
 /**
- * Formats an estimated price from its `marketPrice` fields, e.g. "Ar 3,000".
- * Missing or invalid values render as "Not available" instead of crashing.
+ * Formats an estimated USD price, e.g. "$8.00". Missing or invalid values
+ * render as "Not available" instead of crashing.
  */
-export function formatPrice(value: number | null | undefined, currency: string): string {
+export function formatPrice(value: number | null | undefined): string {
   if (value === null || value === undefined || !Number.isFinite(value)) {
     return 'Not available';
   }
-  const grouped = new Intl.NumberFormat('en-US').format(Math.round(value));
-  if (currency === 'USD') {
-    return `$${grouped}`;
-  }
-  const symbol = CURRENCY_SYMBOLS[currency] ?? currency;
-  return `${symbol} ${grouped}`;
+  return usdFormatter.format(value);
 }
