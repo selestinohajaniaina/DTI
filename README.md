@@ -68,9 +68,9 @@ DTI uses Meta AI models as the core of its photo-to-upcycling workflow.
 
 All Meta API requests are handled by the backend. API credentials are never exposed in the frontend.
 
-## 🎬 Demo
+## DEMO
 
-**Watch DTI in action:** [Demo Video — Coming Soon]( [DEMO_VIDEO_URL] )
+**Watch video demo of DTI on:** [Demo Video — Coming Soon]( [DEMO_VIDEO_URL] )
 
 The demonstration focuses on the working application: uploading an unwanted object, generating creative reuse ideas, viewing AI-generated illustrations, and exploring practical instructions.
 
@@ -140,7 +140,7 @@ http://127.0.0.1:3000
 
 For the deployed application, the backend is hosted separately.
 
-See the [DTI Backend README](https://github.com/selestinohajaniaina/DTI-Backend) for backend installation, database configuration, and environment variables.
+See the [https://github.com/selestinohajaniaina/DTI-Backend](https://github.com/selestinohajaniaina/DTI-Backend) for backend installation, database configuration, and environment variables.
 
 ### 4. Start the development server
 
@@ -156,10 +156,5 @@ Open [http://localhost:4200](http://localhost:4200).
 - The frontend never receives the Meta API key.
 - Uploaded images and generated illustrations are handled by the backend.
 - Authentication and ownership mechanisms are managed server-side.
-
-## 📂 Related Repository
-
-- **Frontend:** [selestinohajaniaina/DTI](https://github.com/selestinohajaniaina/DTI)
-- **Backend:** [selestinohajaniaina/DTI-Backend](https://github.com/selestinohajaniaina/DTI-Backend)
 
 > **NB:** During the development of DTI, we used **Muse Code with `muse-spark-1.3-contributor · max` as AI agent development** to assist with coding, implementation, debugging, and improving the project.
