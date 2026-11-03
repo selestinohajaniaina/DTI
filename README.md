@@ -11,7 +11,7 @@ Instead of treating waste as the end of an object's life, DTI turns a simple pho
 <p align="center">
   <a href="https://dti-ai.vercel.app/">Live Application</a> ·
   <a href="https://github.com/selestinohajaniaina/DTI-Backend">Backend Repository</a> ·
-  <a href="[DEMO_VIDEO_URL]">Demo Video</a>
+  <a href="https://youtu.be/ebzLNZLyDqM">Demo Video</a>
 </p>
 
 ---
@@ -70,7 +70,7 @@ All Meta API requests are handled by the backend. API credentials are never expo
 
 ## DEMO
 
-**Watch video demo of DTI on:** [Demo Video — Coming Soon]( [DEMO_VIDEO_URL] )
+**Watch video demo of DTI on:** [YOUTUBE — https://youtu.be/ebzLNZLyDqM](https://youtu.be/ebzLNZLyDqM)
 
 The demonstration focuses on the working application: uploading an unwanted object, generating creative reuse ideas, viewing AI-generated illustrations, and exploring practical instructions.
 
